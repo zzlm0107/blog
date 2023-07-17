@@ -1,7 +1,7 @@
 import { sidebar } from "vuepress-theme-hope";
 
 export default sidebar({
-  // 一级侧边栏
+  // 主导航页侧边栏
   "/": [
     // "",
     {
@@ -68,7 +68,7 @@ export default sidebar({
     "intro",
   ],
 
-  // 对 /webDev/basic/ 路径下的侧边栏重新定义
+  // 对 /webDev/basic/ 基础入门 路径下的侧边栏重新定义
   "/webDev/basic/": [
     {
       text: "基础入门",
@@ -87,5 +87,83 @@ export default sidebar({
       prefix: "css/",
       link: "/webDev/basic/css/",
     },
+  ],
+
+  // 对 /webDev/javascript/ JS教程 路径下的侧边栏重新定义
+  "/webDev/javascript/": [
+    {
+      text: "JS 教程",
+      icon: "javascript",
+      link: "/webDev/javascript/",
+    },
+    {
+      text: "JS 基础",
+      icon: "jichu",
+      link: "js基础.md",
+    },
+    {
+      text: "JS 进阶",
+      icon: "jinjie",
+      link: "js进阶.md",
+    },
+    {
+      text: "DOM 相关",
+      icon: "dom",
+      link: "dom.md",
+    },
+    {
+      text: "BOM 相关",
+      icon: "bom",
+      link: "bom.md",
+    },
+    {
+      text: "ES6 +",
+      icon: "es6",
+      link: "es6+.md",
+    },
+    {
+      text: "Ajax 学习",
+      icon: "ajax",
+      link: "ajax.md",
+    },
+    {
+      text: "Axios 使用",
+      icon: "any",
+      link: "axios.md",
+    },
+  ],
+
+  // 对 /webDev/vue/ vue 路径下的侧边栏重新定义
+  "/webDev/vue/": [
+    {
+      text: "Vue.js 介绍",
+      icon: "vue",
+      link: "/webDev/vue/",
+    },
+    {
+      text: "Vue2 笔记",
+      icon: "vue",
+      link: "vue2.md",
+    },
+    {
+      text: "Vuex",
+      icon: "state",
+      link: "vuex.md",
+    },
+    {
+      text: "Vue Router",
+      icon: "router",
+      link: "vue-router.md",
+    },
+    {
+      text: "Vue3 笔记",
+      icon: "vue",
+      link: "vue3.md",
+    },
+    {
+      text: "Pinia",
+      icon: "state",
+      link: "pinia.md",
+    }
   ],
 });
