@@ -4,97 +4,147 @@ export default sidebar({
   // 主导航页侧边栏
   "/": [
     // "",
+    // {
+    //   text: "如何使用",
+    //   icon: "laptop-code",
+    //   prefix: "demo/",
+    //   link: "demo/",
+    //   children: "structure",
+    // },
     {
-      text: "如何使用",
-      icon: "laptop-code",
-      prefix: "demo/",
-      link: "demo/",
-      children: "structure",
+      text: "代码笔记",
+      icon: "write",
+      prefix: "code/",
+      link: "code/",
     },
     {
-      text: "笔记导航",
-      icon: "write",
-      prefix: "webDev/",
-      link: "webDev/",
+      text: "计算机基础",
+      icon: "computer",
+      prefix: "code/computer/",
+      link: "code/computer/",
     },
     {
       text: "前端开发",
       icon: "code",
+      prefix: "code/webDev/",
+      link: "code/webDev/",
       children: [
         {
           text: "基础入门",
           icon: "back-stage",
           prefix: "basic/",
-          link: "/webDev/basic/",
+          link: "basic/",
         },
         {
           text: "JS 教程",
           icon: "javascript",
           prefix: "javascript/",
-          link: "/webDev/javascript/"
+          link: "javascript/"
         },
         {
           text: "TS 教程",
           icon: "typescript",
           prefix: "typescript/",
-          link: "/webDev/typescript/"
+          link: "typescript/"
         },
         {
           text: "Node.js",
           icon: "nodeJS",
           prefix: "node/",
-          link: "/webDev/node/"
+          link: "node/"
         },
         {
           text: "Vue.js",
           icon: "vue",
           prefix: "vue/",
-          link: "/webDev/vue/"
+          link: "vue/"
         },
         {
           text: "React",
           icon: "react",
           prefix: "react/",
-          link: "/webDev/react/"
+          link: "react/"
         },
         {
           text: "小程序",
           icon: "mini-app",
           prefix: "mini-app/",
-          link: "/webDev/mini-app/"
+          link: "mini-app/"
+        },
+        {
+          text: "Webpack",
+          icon: "webpack",
+          prefix: "webpack/",
+          link: "webpack/"
+        },
+        {
+          text: "Vite",
+          icon: "vite",
+          prefix: "vite/",
+          link: "vite/"
+        },
+        {
+          text: "第三方库",
+          icon: "npm",
+          prefix: "npm/",
+          link: "npm/",
         },
       ],
     },
-    "intro",
+    // "intro",
   ],
 
-  // 对 /webDev/basic/ 基础入门 路径下的侧边栏重新定义
-  "/webDev/basic/": [
+  // /code/computer/ 侧边栏重定义
+  "/code/computer/": [
+    {
+      text: "计算机基础",
+      icon: "computer",
+      link: "/code/computer/",
+    },
+    {
+      text: "HTTP",
+      icon: "http",
+      link: "http.md",
+    },
+    {
+      text: "Git",
+      icon: "git",
+      link: "git.md",
+    },
+    {
+      text: "Markdown",
+      icon: "markdown",
+      link: "markdown.md",
+    },
+  ],
+
+  // 对 /code/webDev/basic/ 侧边栏重定义
+  "/code/webDev/basic/": [
     {
       text: "基础入门",
       icon: "back-stage",
-      link: "/webDev/basic/",
+      link: "/code/webDev/basic/",
     },
     {
       text: "HTML",
       icon: "html",
       prefix: "html/",
-      link: "/webDev/basic/html/",
+      link: "/code/webDev/basic/html/",
     },
     {
       text: "CSS",
       icon: "css",
       prefix: "css/",
-      link: "/webDev/basic/css/",
+      link: "/code/webDev/basic/css/",
     },
   ],
 
-  // 对 /webDev/javascript/ JS教程 路径下的侧边栏重新定义
-  "/webDev/javascript/": [
+  // 对 /webDev/javascript/ 路径下的侧边栏重新定义
+  "/code/webDev/javascript/": [
     {
       text: "JS 教程",
       icon: "javascript",
-      link: "/webDev/javascript/",
+      link: "/code/webDev/javascript/",
     },
     {
       text: "JS 基础",
@@ -133,12 +183,26 @@ export default sidebar({
     },
   ],
 
-  // 对 /webDev/vue/ vue 路径下的侧边栏重新定义
-  "/webDev/vue/": [
+  // 对 /webDev/typescript/ 路径下的侧边栏重新定义
+  "/code/webDev/typescript/": [
+    {
+      text: "TS 教程",
+      icon: "typescript",
+      link: "/code/webDev/typescript/",
+    },
+    {
+      text: "TS 基础",
+      icon: "jichu",
+      link: "ts基础.md",
+    },
+  ],
+
+  // 对 /webDev/vue/ 路径下的侧边栏重新定义
+  "/code/webDev/vue/": [
     {
       text: "Vue.js 介绍",
       icon: "vue",
-      link: "/webDev/vue/",
+      link: "/code/webDev/vue/",
     },
     {
       text: "Vue2 笔记",
@@ -164,6 +228,72 @@ export default sidebar({
       text: "Pinia",
       icon: "state",
       link: "pinia.md",
+    }
+  ],
+
+  // 对 /webDev/mini-app/ 路径下的侧边栏重新定义
+  "/code/webDev/mini-app/": [
+    {
+      text: "小程序介绍",
+      icon: "mini-app",
+      link: "/code/webDev/mini-app/",
+    },
+    {
+      text: "uni-app 基础",
+      icon: "jichu",
+      link: "uniapp基础.md",
+    },
+    {
+      text: "uni-app 云开发",
+      icon: "jinjie",
+      link: "uniapp云开发.md",
+    },
+  ],
+
+  // 对 /webDev/react/ 路径下的侧边栏重新定义
+  "/code/webDev/react/": [
+    {
+      text: "React 介绍",
+      icon: "react",
+      link: "/code/webDev/react/",
+    },
+    {
+      text: "React 基础",
+      icon: "react",
+      link: "react基础.md",
+    },
+    {
+      text: "Redux",
+      icon: "state",
+      link: "redux.md",
+    },
+    {
+      text: "React Router",
+      icon: "router",
+      link: "react-router-dom.md",
+    },
+    {
+      text: "Hooks 进阶",
+      icon: "jinjie",
+      link: "hooks进阶.md",
+    }
+  ],
+
+  "/code/webDev/npm/": [
+    {
+      text: "npm与第三方包",
+      icon: "npm",
+      link: "/code/webDev/npm/",
+    },
+    {
+      text: "Bootstrap5",
+      icon: "bootstrap",
+      link: "bootstrap5.md",
+    },
+    {
+      text: "Three.js",
+      icon: "model",
+      link: "threejs.md",
     }
   ],
 });
