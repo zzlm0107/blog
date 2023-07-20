@@ -14,6 +14,6 @@ tag:
 
 后续可能会更新markdown版本。
 
-- [CSS2 笔记(pdf版本)](https://github.com/zzlm0107/blog/blob/main/src/code/webDev/basic/pdf/CSS2%E7%AC%94%E8%AE%B0.pdf)
+- [CSS2 笔记(pdf版本)](https://github.com/zzlm0107/blog/blob/main/src/assets/pdf/CSS2%E7%AC%94%E8%AE%B0.pdf)
 
-- [CSS3 笔记(pdf版本)](https://github.com/zzlm0107/blog/blob/main/src/code/webDev/basic/pdf/CSS3%E7%AC%94%E8%AE%B0.pdf)
+- [CSS3 笔记(pdf版本)](https://github.com/zzlm0107/blog/blob/main/src/assets/pdf/CSS3%E7%AC%94%E8%AE%B0.pdf)

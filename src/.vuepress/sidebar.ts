@@ -128,14 +128,32 @@ export default sidebar({
     {
       text: "HTML",
       icon: "html",
-      prefix: "html/",
-      link: "/code/webDev/basic/html/",
+      link: "html.md",
     },
     {
       text: "CSS",
       icon: "css",
-      prefix: "css/",
-      link: "/code/webDev/basic/css/",
+      link: "css.md",
+    },
+    {
+      text: "Flex 弹性布局",
+      icon: "flex",
+      link: "flex.md",
+    },
+    {
+      text: "Grid 网格布局",
+      icon: "grid",
+      link: "grid.md",
+    },
+    {
+      text: "Less 预处理器",
+      icon: "less",
+      link: "less.md",
+    },
+    {
+      text: "Sass 预处理器",
+      icon: "sass",
+      link: "sass.md",
     },
   ],
 
