@@ -8,6 +8,14 @@ tag:
   - git
 ---
 
+git作为目前最流行的代码版本控制管理工具。
+
+学习网站参考：
+
+- **git官网：** <https://git-scm.com/book/zh/v2>
+
+- **菜鸟教程** <https://www.runoob.com/git/git-tutorial.html>
+
 ## git基本命令
 
 git使用前 配置提交人信息

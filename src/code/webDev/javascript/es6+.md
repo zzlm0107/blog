@@ -5,7 +5,7 @@ date: 2022-11-14
 category:
   - JS
 tag:
-  - 语法进阶
+  - 编程进阶
 ---
 
 更加细致的学习文档可以参考 [ES6文档](https://www.bookstack.cn/read/es6-3rd/sidebar.md)

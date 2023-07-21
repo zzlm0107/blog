@@ -10,10 +10,12 @@ tag:
 
 ## 笔记
 
-初期学习是使用纸张记录的，并未留存电子版内容，后期找到了他人的相关pdf版本，放在此处，仅供学习参考。
+初期学习是使用纸张记录的，并未留存电子版内容，在此放置一些网站教学网址，仅供学习参考。
 
 后续可能会更新markdown版本。
 
-- [CSS2 笔记(pdf版本)](https://github.com/zzlm0107/blog/blob/main/src/assets/pdf/CSS2%E7%AC%94%E8%AE%B0.pdf)
+学习网站参考：
 
-- [CSS3 笔记(pdf版本)](https://github.com/zzlm0107/blog/blob/main/src/assets/pdf/CSS3%E7%AC%94%E8%AE%B0.pdf)
+- **MDN** <https://developer.mozilla.org/zh-CN/docs/Web/CSS>
+
+- **菜鸟教程** <https://www.runoob.com/css/css-tutorial.html>

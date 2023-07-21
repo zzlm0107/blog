@@ -9,6 +9,18 @@ tag:
   - 计算机网络
 ---
 
+HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网上应用最为广泛的一种网络传输协议。
+
+学习网站参考：
+
+- **MDN** <https://developer.mozilla.org/zh-CN/docs/web/http/overview>
+
+- **菜鸟教程** <https://www.runoob.com/http/http-tutorial.html>
+
+- **devdocs** <https://devdocs.io/http/>
+
+<!-- more -->
+
 ## 经典五层模型
 
 ![](https://github.com/Tie-Dan/http-demo/raw/main/img/%E4%BA%94%E5%B1%82%E6%A8%A1%E5%9E%8B.png)

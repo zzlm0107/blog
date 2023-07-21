@@ -8,6 +8,14 @@ tag:
   - markdown
 ---
 
+Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。
+
+学习网站参考：
+
+- **官方教程：** <https://markdown.com.cn/basic-syntax/>
+
+- **菜鸟教程** <https://www.runoob.com/markdown/md-tutorial.html>
+
 
 ## Markdown 基本语法
 

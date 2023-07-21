@@ -193,12 +193,7 @@ export default sidebar({
       text: "Ajax 学习",
       icon: "ajax",
       link: "ajax.md",
-    },
-    {
-      text: "Axios 使用",
-      icon: "any",
-      link: "axios.md",
-    },
+    }
   ],
 
   // 对 /webDev/typescript/ 路径下的侧边栏重新定义
@@ -307,6 +302,11 @@ export default sidebar({
       text: "Bootstrap5",
       icon: "bootstrap",
       link: "bootstrap5.md",
+    },
+    {
+      text: "Axios 使用",
+      icon: "any",
+      link: "axios.md",
     },
     {
       text: "Three.js",

@@ -8,6 +8,11 @@ tag:
   - css
 ---
 
+Sess是一个css预处理器，利用提供的特定语法帮助我们更方便的书写css代码。
+
+学习网站参考：
+
+- **Sass中文网** <https://www.sass.hk/docs/>
 
 ## Sass学习
 
