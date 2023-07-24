@@ -4,7 +4,7 @@ layout: BlogHome
 icon: home
 title: 主页
 heroImage: /avatar.png
-# heroImageStyle: {borderRadius: 50%}
+bgImage: /homeBgImage.jpg
 heroText: 正の博客
 heroFullScreen: true
 tagline: 年轻人，支楞起来啊
