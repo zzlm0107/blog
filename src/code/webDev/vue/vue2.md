@@ -9,6 +9,10 @@ tag:
   - vue
 ---
 
+**vue2官网** <https://v2.cn.vuejs.org/>
+
+**菜鸟教程** <https://www.runoob.com/vue2/vue-tutorial.html>
+
 
 ## vue框架简介
 

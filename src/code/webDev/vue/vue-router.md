@@ -9,9 +9,9 @@ tag:
   - 路由
 ---
 
- **vue-router** 是vue官方提供的用来实现SPA 路由跳转的插件。
- 
- 在线文档: http://router.vuejs.org/zh-cn/
+**vue-router** 是vue官方提供的用来实现SPA 路由跳转的插件。
+
+**官方文档** <http://router.vuejs.org/zh-cn/>
 
 
 

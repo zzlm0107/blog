@@ -12,12 +12,13 @@ tag:
 
 ## 初识React
 
+**中文文档** <https://zh-hans.react.dev/>
+
 使用React的好处：
 
 1. 采用**组件化模式**、**声明式编码**，提高开发效率及组件复用率
 2. 在 React Native中可以使用React语法进行**移动端开发**
 3. 使用**虚拟DOM**+**Diff算法**，尽量减少与真实DOM的交互
-
 
 
 开始我们的第一个react页面：
@@ -501,7 +502,7 @@ render(){
 
 ### 旧版生命周期
 
-<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/896e2a2a89f642129503d283b41876d3~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" style="width:600px">
+![React旧生命周期](../../../assets/images/react/旧生命周期.png)
 
 
 
@@ -544,7 +545,7 @@ render(){
 
 ### 新版生命周期
 
-<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3bceabc916b74ff9b9a2f4552fd9b530~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" style="width:600px">
+![React新生命周期](../../../assets/images/react/新生命周期.png)
 
 
 

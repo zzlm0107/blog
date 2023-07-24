@@ -1,5 +1,5 @@
 ---
-title: Axios 笔记
+title: Axios
 icon: any
 date: 2022-12-04
 category:
