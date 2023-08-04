@@ -116,6 +116,16 @@ export default sidebar({
       icon: "markdown",
       link: "markdown.md",
     },
+    {
+      text: "设计模式",
+      icon: "change",
+      link: "设计模式.md",
+    },
+    {
+      text: "数据结构与算法",
+      icon: "array",
+      link: "数据结构与算法.md",
+    },
   ],
 
   // 对 /code/webDev/basic/ 侧边栏重定义
