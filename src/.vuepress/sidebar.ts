@@ -72,6 +72,12 @@ export default sidebar({
           link: "mini-app/"
         },
         {
+          text: "服务端渲染",
+          icon: "page",
+          prefix: "ssr/",
+          link: "ssr/"
+        },
+        {
           text: "Webpack",
           icon: "webpack",
           prefix: "webpack/",
@@ -203,6 +209,11 @@ export default sidebar({
       text: "Ajax 学习",
       icon: "ajax",
       link: "ajax.md",
+    },
+    {
+      text: "Canvas 相关",
+      icon: "flower",
+      link: "canvas.md",
     }
   ],
 
@@ -299,6 +310,19 @@ export default sidebar({
       text: "Hooks 进阶",
       icon: "jinjie",
       link: "hooks进阶.md",
+    }
+  ],
+
+  "/code/webDev/ssr/": [
+    {
+      text: "服务端渲染",
+      icon: "page",
+      link: "/code/webDev/ssr/",
+    },
+    {
+      text: "Nuxt",
+      icon: "view",
+      link: "nuxt.md",
     }
   ],
 
