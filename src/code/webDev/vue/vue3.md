@@ -359,10 +359,6 @@ watchEffect(()=>{
   
 - setup执行的时机是在props解析之后，beforeCreacte执行之前。具体的执行时机参考官网图示
 
-  
-
-  ![](../../../assets/vue/vue3生命周期.png)
-
 
 
 ### 9.自定义hook函数
