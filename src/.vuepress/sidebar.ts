@@ -206,6 +206,11 @@ export default sidebar({
       link: "es6+.md",
     },
     {
+      text: "JSDoc",
+      icon: "context",
+      link: "JSDoc.md",
+    },
+    {
       text: "Ajax 学习",
       icon: "ajax",
       link: "ajax.md",

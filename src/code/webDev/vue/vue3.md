@@ -357,11 +357,11 @@ watchEffect(()=>{
   
 - 如果在setup中和外部同时调用一个生命周期函数，setup的生命周期函数 在外部的生命周期函数之前执行
   
-- setup执行的时机是在props解析之后，beforeCreate执行之前，此时已经可以获取到data和method等，所以setup相当于是beforeCreate和created的组合。具体的执行时机参考官网图示
+- setup执行的时机是在props解析之后，beforeCreacte执行之前。具体的执行时机参考官网图示
 
   
 
-  ![](https://cn.vuejs.org/assets/lifecycle.16e4c08e.png)
+  ![](../../../assets/vue/vue3生命周期.png)
 
 
 
