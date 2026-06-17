@@ -9,6 +9,11 @@ export default defineUserConfig({
   title: "张正的博客",
   description: "学习笔记",
 
+  // 配置 Algolia 搜索
+  head: [
+    ["meta", { name: "algolia-site-verification", content: "C890951457106007" }],
+  ],
+
   theme,
 
   // 和 PWA 一起启用
