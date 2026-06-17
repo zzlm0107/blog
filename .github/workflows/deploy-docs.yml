@@ -32,6 +32,9 @@ jobs:
           cache: pnpm
 
       - name: 安装依赖
+        env:
+          # 绕过最短发布时间限制
+          PNPM_CONFIG_MINIMUM_RELEASE_AGE: 0
         run: |
           corepack enable
           pnpm ci
