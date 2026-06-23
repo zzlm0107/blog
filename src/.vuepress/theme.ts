@@ -176,6 +176,12 @@ export default hopeTheme({
     //   serverURL: "https://waline-comment.vuejs.press",
     // },
 
+    docsearch: {
+      appId: '70LTEX89XN',
+      apiKey: 'af3a3b2fa26c234f7a808fe52127bd18',
+      indices: ['blog']
+    },
+
     components: {
       components: ["Badge", "VPCard"],
     },
