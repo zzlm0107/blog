@@ -1351,3 +1351,138 @@ box2.addEventListener('drop', (e) => {
 </script>
 ```
 
+
+## 滚动分页吸附效果
+
+在移动端页面中经常会出现滚动分页吸附效果，一般场景时上方一行tab栏，下面是内容区域，内容区域除了上下滚动查看外，还可以左右滑动，实现切换查看不同的tab内容，并且上方的tab激活样式也会同步更新，下面简单介绍下2种实现方式：
+
+1. 使用Swiper.js
+
+使用这个轮播库可以很容易的实现内容区域的滚动分页与吸附效果，并且其内部配置提供了 sildeChange 事件在切换分页时触发。
+在事件中我们可以根据当前分页索引来更新上方的tab激活样式。
+
+```js
+// 使用 Swiper
+const swiper = new Swiper('.swiper-container', {
+  on: {
+    slideChange: function () {
+      // 自动切换时，同步更新外部 Tab 的 active 状态
+      updateTabs(this.activeIndex);
+    }
+  }
+});
+// 点击外部 Tab 时，调用 swiper.slideTo(index);
+```
+
+2. 使用 CSS scroll-snap-type + JS 计算滚动程度实现
+
+CSS `scroll-snap-type` ([MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference/Properties/scroll-snap-type)) 属性可以实现滚动分页吸附效果,搭配计算滚动距离 / 分页宽度，就可以获得当前是第几页，在激活对应 tab 样式即可
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .content-list {
+            display: flex;
+            width: 100%;
+            height: 300px;
+            overflow-x: auto;
+            /* 水平滚动强制吸附 */
+            scroll-snap-type: x mandatory; 
+        }
+
+        .item {
+          /* 每个占满一屏 */
+            flex: 0 0 100%;
+            /* 吸附在左侧 */
+            scroll-snap-align: start;
+            /* 强制每次滚动只能停在一页 */
+            scroll-snap-stop: always;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            background: #f0f0f0;
+            border-right: 1px solid #ddd;
+        }
+
+        .item:nth-child(odd) {
+            background: #e0e0e0;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .tabs span {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fff;
+            transition: all 0.3s;
+        }
+
+        .tabs span.active {
+            background: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content-list" id="contentList" onscroll="scrollHandle()">
+            <div class="item">页面1</div>
+            <div class="item">页面2</div>
+            <div class="item">页面3</div>
+        </div>
+    <div class="tabs">
+        <span class="active" data-index="0">Tab1</span>
+        <span data-index="1">Tab2</span>
+        <span data-index="2">Tab3</span>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function scrollHandle() {
+        const contentList = document.getElementById('contentList');
+        const tabs = document.querySelectorAll('.tabs span');
+
+        // 计算当前滚动到第几个页面 滚动距离 / 分页宽度
+        const pageIndex = Math.round(contentList.scrollLeft / contentList.offsetWidth);
+        // 更新tab高亮状态
+        tabs.forEach((tab, index) => {
+            if (index === pageIndex) {
+                tab.classList.add('active');
+            } else {
+                tab.classList.remove('active');
+            }
+        });
+    }
+
+    // 点击tab跳转到对应页面
+    document.querySelectorAll('.tabs span').forEach(tab => {
+        tab.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            const contentList = document.getElementById('contentList');
+            contentList.scrollTo({
+                left: index * contentList.offsetWidth,
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+```
+
