@@ -21,3 +21,8 @@ icon: fa-solid fa-feather
 - **[React官网](https://zh-hans.react.dev/)**
 
 - **[Vite官网](https://cn.vitejs.dev/)**
+
+
+## 部分优质笔记
+
+[前端文章技术杂谈](https://www.yuque.com/guluguluwater-qkq0t/qbbqks/sh7dygndpr6qy62r)
