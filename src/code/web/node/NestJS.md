@@ -420,7 +420,7 @@ bootstrap();
 
 ## 守卫
 
-守卫是一个用 @Injectable() 装饰器注解的类，它实现了 CanActivate 接口。守卫的主要作用是验证请求是否符合预期，例如检查用户是否已登录、是否有权限访问该资源等。守卫需要包含 canActivate() 方法，该方法接收一个 ExecutionContext 实例作为参数，返回一个 Promise<boolean> 或 boolean。
+守卫是一个用 @Injectable() 装饰器注解的类，它实现了 CanActivate 接口。守卫的主要作用是验证请求是否符合预期，例如检查用户是否已登录、是否有权限访问该资源等。守卫需要包含 canActivate() 方法，该方法接收一个 ExecutionContext 实例作为参数，返回一个 `Promise<boolean>` 或 boolean。
 
 守卫在所有中间件之后执行，但在任何拦截器或管道之前执行。
 
@@ -567,6 +567,7 @@ const result = await this.catsRepository.query('SELECT * FROM cat WHERE id = $1'
 ```
 
 6. 而使用 DataSource 创建 queryRunner 是一种支持事务的方式。
+
 ```ts
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource } from '@nestjs/typeorm';
@@ -574,40 +575,32 @@ import { DataSource } from 'typeorm';
 
 @Injectable()
 export class CatsService {
-  constructor(
-    @InjectDataSource() private dataSource: DataSource,
-  ) {}
+    constructor(@InjectDataSource() private dataSource: DataSource) {}
 
-  async complexTransaction(id: number) {
-    // 1. 创建 QueryRunner 实例
-    const queryRunner = this.dataSource.createQueryRunner();
-    
-    // 2. 连接到数据库并开启事务
-    await queryRunner.connect();
-    await queryRunner.startTransaction();
+    async complexTransaction(id: number) {
+        // 1. 创建 QueryRunner 实例
+        const queryRunner = this.dataSource.createQueryRunner();
 
-    try {
-      // 3. 使用 queryRunner.manager 执行所有操作
-      await queryRunner.manager.query(
-        `UPDATE cats SET status = 'active' WHERE id = $1`,
-        [id]
-      );
-      
-      await queryRunner.manager.query(
-        `INSERT INTO cat_audit (cat_id, action) VALUES ($1, 'activated')`,
-        [id]
-      );
+        // 2. 连接到数据库并开启事务
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
 
-      // 4. 所有操作成功，提交事务
-      await queryRunner.commitTransaction();
-    } catch (error) {
-      // 5. 发生错误，回滚事务
-      await queryRunner.rollbackTransaction();
-      throw error; // 重新抛出异常
-    } finally {
-      // 6. 释放 QueryRunner
-      await queryRunner.release();
+        try {
+            // 3. 使用 queryRunner.manager 执行所有操作
+            await queryRunner.manager.query(`UPDATE cats SET status = 'active' WHERE id = $1`, [id]);
+
+            await queryRunner.manager.query(`INSERT INTO cat_audit (cat_id, action) VALUES ($1, 'activated')`, [id]);
+
+            // 4. 所有操作成功，提交事务
+            await queryRunner.commitTransaction();
+        } catch (error) {
+            // 5. 发生错误，回滚事务
+            await queryRunner.rollbackTransaction();
+            throw error; // 重新抛出异常
+        } finally {
+            // 6. 释放 QueryRunner
+            await queryRunner.release();
+        }
     }
-  }
 }
 ```
