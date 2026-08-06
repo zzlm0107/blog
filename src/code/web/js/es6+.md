@@ -195,6 +195,13 @@ function promiseAjax(url) {
   
   传递一个由promise组成的数组，返回一个新的 promise, 只有所有的 promise **都成功才成功**, 只要有一 个失败了就直接失败
 
+- `Promise.allSettled` 方法
+
+  传递一个由promise组成的数组,返回一个新的 promise, 当传入的所有promise状态都确定时，返回的promise才成功，成功的结果是一个按照传入promise数组的顺序排序的结果对象数组，每个对象包含一下属性：`status`和`value`和`reason`。
+    - `status`属性值是`fulfilled`或`rejected`, 表示当前这个promise的状态。
+    - `value`属性是对应的promise的成功时的结果。
+    - `reason`属性是对应的promise的失败时的原因。
+
 - `Promise.race` 方法
   
   传递一个由promise组成的数组,返回一个新的 promise, **第一个完成**的 promise 的结果状态就是最终的结果状态
@@ -202,6 +209,11 @@ function promiseAjax(url) {
 - `Promise.any` 方法
   
   传递一个由promise组成的数组,返回一个新的 promise, **第一个成功**的 promise 的结果状态就是最终的结果状态，如果所有 promise 都失败了，则返回一个失败原因的数组。
+
+- `Promise.try` 方法
+  
+  传入一个任意函数和它的入参，将其包装为一个promise并返回，如果是同步函数，promise自动成功，如果函数抛出异常，promise自动失败；如果是异步函数，promise根据函数执行结果自动切换状态。
+
 
 **讨论：**
 
