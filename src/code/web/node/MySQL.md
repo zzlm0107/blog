@@ -84,12 +84,12 @@ insert_time datetime default current_timestamp,	# 插入
 此外还有一些操作表与字段的命令：
 
 ```sql
-# （在指定字段之前或之后）新增表字段
-alter table 表名 add 字段名 字段类型 [first|after 字段名]
+# （在指定字段之后 after 字段名，或全表之前 仅 first）新增表字段
+alter table 表名 add 字段名 字段类型 [first | after 字段名]
 # 修改表字段名与类型，也可修改到指定字段之前或之后位置
-alter table 表名 change 原字段名 新字段名 新字段类型 [first|after 字段名]
+alter table 表名 change 原字段名 新字段名 新字段类型 [first | after 字段名]
 # 修改表字段类型
-alter table 表名 modify 字段名 新字段类型 [first|after 字段名]
+alter table 表名 modify 字段名 新字段类型 [first | after 字段名]
 # 删除字段
 alter table 表名 drop 字段名
 
