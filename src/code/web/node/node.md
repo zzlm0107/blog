@@ -22,15 +22,15 @@ Node.js 是一个基于Chrome V8引擎的JavaScript运行环境，使用了一�
 
 安装node，会自动安装npm。npm是node的包管理器，用于安装和管理node的模块；先使用`npm init -y` 初始化项目，会自动创建一个package.json文件，用于记录项目依赖的模块，npm下载的依赖包都会放到`node_modules`文件夹中，下面是一些常用的npm命令：
 
-- npm init：初始化一个新的 npm 项目，创建 package.json 文件。
-- npm install：安装 package.json 文件中指定的依赖包。
-- npm install <package-name>：安装指定的包。
-- npm install <package-name> --save：安装指定的包，并将其添加到 package.json 文件中的依赖列表中。
-- npm install <package-name> --save-dev：安装指定的包，并将其添加到 package.json 文件中的开发依赖列表中。
-- npm install -g <package-name>：全局安装指定的包。
-- npm update <package-name>：更新指定的包。
-- npm uninstall <package-name>：卸载指定的包。
-- npm run <script-name>：执行 package.json 文件中定义的脚本命令。
+- `npm init`：初始化一个新的 npm 项目，创建 package.json 文件。
+- `npm install`：安装 package.json 文件中指定的依赖包。
+- `npm install <package-name>`：安装指定的包。
+- `npm install <package-name>` --save：安装指定的包，并将其添加到 package.json 文件中的依赖列表中。
+- `npm install <package-name> --save-dev`：安装指定的包，并将其添加到 package.json 文件中的开发依赖列表中。
+- `npm install -g <package-name>`：全局安装指定的包。
+- `npm update <package-name>`：更新指定的包。
+- `npm uninstall <package-name>`：卸载指定的包。
+- `npm run <script-name>`：执行 package.json 文件中定义的脚本命令。
 
 关于package.json文件中相关的字段含义，部分字段解释如下：
 
