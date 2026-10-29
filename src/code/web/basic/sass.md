@@ -18,19 +18,13 @@ Sess是一个css预处理器，利用提供的特定语法帮助我们更方便�
 强制注释：/* ! */ css文件里会显示 压缩方式的css会显示
 ```
 
-
-
 ### 嵌套写法
 
 与less相同，可查看上文。
 
-
-
 ### 父元素选择器&
 
 与less相同，可查看上文。
-
-
 
 ### 占位符选择器%
 
@@ -39,12 +33,10 @@ Sess是一个css预处理器，利用提供的特定语法帮助我们更方便�
 ```scss
 // 用来进行极差等扩展，不会对其进行编译
 %box {
-	width: 100px;
-	height: 100px;
+  width: 100px;
+  height: 100px;
 }
 ```
-
-
 
 ### 运算
 
@@ -53,16 +45,14 @@ sass同样有运算功能，用法基本与less相同。
 ```scss
 // .scss文件
 .box {
-    width: 50px + 50px;
-    height: 100px - 50px;
-    // 这里不能两个都带单位，否则是100px*px这种不合法的值
-    margin-top: 10px * 10; 
-    // css会将/认为是合法的，所以需要加括号
-    padding-top: (100px / 2) ;
+  width: 50px + 50px;
+  height: 100px - 50px;
+  // 这里不能两个都带单位，否则是100px*px这种不合法的值
+  margin-top: 10px * 10;
+  // css会将/认为是合法的，所以需要加括号
+  padding-top: (100px / 2);
 }
 ```
-
-
 
 ### 变量
 
@@ -72,7 +62,7 @@ sass中变量的定义语法为 **`$变量名：值`** 。需要使用时直接�
 
 - 使用 **！global** 来定义全局变量; 使用 **！default** 来定义默认变量。
 
-- 对于选择器名称、属性名称、url和@import使用变量时，变量必须以插值  **#{$变量名}**  的形式使用（同less）。
+- 对于选择器名称、属性名称、url和@import使用变量时，变量必须以插值 **#{$变量名}** 的形式使用（同less）。
 
 - 变量也可以用来定义**list列表**和**map集合**（一组键值对）。
 
@@ -80,21 +70,22 @@ sass中变量的定义语法为 **`$变量名：值`** 。需要使用时直接�
 // .scss文件  Sass后缀名为scss
 $dark: #000;
 $side: left;
-$dark: #eee !default;   //默认变量，如果没有定义过就使用，定义过就使用定义的
+$dark: #eee !default; //默认变量，如果没有定义过就使用，定义过就使用定义的
 
-$my-list: 1px 5px 10px 20px;	// list列表
-$my-map: (font-10: 10px, font-red: red);  // map集合
+$my-list: 1px 5px 10px 20px; // list列表
+$my-map: (
+  font-10: 10px,
+  font-red: red,
+); // map集合
 .box {
-    color: $dark;
-    $my-color: #fff !global; 	// 在局部定义全局变量
+  color: $dark;
+  $my-color: #fff !global; // 在局部定义全局变量
 }
 
 .box2 {
-    border-#{$side}-radius: 5px; // 在选择器名称上使用变量
+  border-#{$side}-radius: 5px; // 在选择器名称上使用变量
 }
 ```
-
-
 
 ### 混入
 
@@ -103,60 +94,57 @@ $my-map: (font-10: 10px, font-red: red);  // map集合
 **不含参数的混合：**
 
 ```scss
-@mixin mystyle {      //定义一个混合
+@mixin mystyle {
+  //定义一个混合
   // css样式
 }
 
 .box {
-  @include mystyle;    //使用混合样式
+  @include mystyle; //使用混合样式
 }
 ```
 
 **含有参数的混合：** 可以指定参数传值，这样参数顺序未知也可以正确传值；也可以设置默认值
 
 ```scss
-@mixin mystyle ($param1，$param2， ...) {
-    // css样式
+@mixin mystyle($param1，$param2，...) {
+  // css样式
 }
 ```
 
 ```scss
 // 定义一个有默认参数的mixin
-@mixin box ($width: 50px, $height: 50px) {
-    width: $width;
-    height: $height;
+@mixin box($width: 50px, $height: 50px) {
+  width: $width;
+  height: $height;
 }
 // 使用
 .box {
-    // 直接将css样式写入,也可以传入定义的变量
-    @include box(200px, 200px);
+  // 直接将css样式写入,也可以传入定义的变量
+  @include box(200px, 200px);
 }
 ```
 
-
-
 ### 继承
 
-如果一个元素的样式和另一个元素的样式完全一样，可以使用  **@extend**  就可以把另一个元素的所有样式全部继承过来，继承的本质就是使用并集运算符。
+如果一个元素的样式和另一个元素的样式完全一样，可以使用 **@extend** 就可以把另一个元素的所有样式全部继承过来，继承的本质就是使用并集运算符。
 
 ```scss
 // .scss文件
 %box1 {
-    width: 200px;
-    height: 200px;
+  width: 200px;
+  height: 200px;
 }
 
 // box2 继承 box1的样式
 .box2 {
-    @extend %box1;
+  @extend %box1;
 }
 ```
 
 **但继承要慎用，被继承相关的元素的子元素的样式也会继承。**
 
 **混入与继承的主要区别就是：混入可以传递参数实现动态生成样式，而继承只能提前写好重复样式，复用性较差。**
-
-
 
 ### 条件判断与循环
 
@@ -185,9 +173,9 @@ Sass也支持**for循环**，重复输出css，有两种语法：
 
 // .scss文件
 @for $i from 1 to 5 {
-    .col-#{$i} {
-        width: 50px * $i;
-    }
+  .col-#{$i} {
+    width: 50px * $i;
+  }
 }
 ```
 
@@ -202,9 +190,9 @@ Sass同样支持**each循环**：
 // .scss文件
 $icons: success fail warning; // 列表
 @each $i in $icons {
-    .icon-#{$i} {
-        background-image: url(../images/icons/#{$icon}.png);
-    }
+  .icon-#{$i} {
+    background-image: url(../images/icons/#{$icon}.png);
+  }
 }
 ```
 
@@ -217,15 +205,13 @@ $icons: success fail warning; // 列表
 // .scss文件
 $index: 6;
 @while $index> 0 {
-    .box-#{$index} {
-        width: 5px * $index;
-    }
+  .box-#{$index} {
+    width: 5px * $index;
+  }
 
-    $index: $index - 2;
+  $index: $index - 2;
 }
 ```
-
-
 
 ### 自定义函数
 
@@ -238,29 +224,48 @@ $index: 6;
 // .scss文件
 $index: 6;
 @function get-color($key) {
-    @if $key > 5 {
-        @return #000;
-    } @else {
-        @return #fff;
-    }
+  @if $key > 5 {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
 }
 
 body {
-    background-color: get-color($index);
+  background-color: get-color($index);
 }
 ```
 
-
-
 ### 导入
 
-sass的导入同样使用  **@import**  完成。
+sass的导入同样使用 **@import** 完成。
 
 ```scss
 @import url('./reset.scss');
 ```
 
+_如果像让sass文件不进行编译，如只用来定义全局变量的sass文件，只需要对文件重命名在前面加上一个 **下划线 \_** 即可。_
 
+> 补充：sass官方已经弃用了@import导入，现在推荐使用 @use 进行导入
 
-*如果像让sass文件不进行编译，如只用来定义全局变量的sass文件，只需要对文件重命名在前面加上一个 **下划线 _** 即可。*
+`@import` 导入在当前文件是**全局作用域**，容易导致变量命名混乱和冲突。
 
+**`@use`**默认给导入文件创建一个**命名空间**（即文件名）。你必须通过 `命名空间.变量` 的方式访问; 如果配置了 `as *`，就相当于放弃了命名空间，用法和 `@import` 一样直接,但依然保留了“只编译一次”和“默认只加载变量、混入和函数,不会加载该文件中的普通 CSS 样式”的性能优势
+
+```scss
+// _variables.scss
+$primary: blue;
+
+// 使用 @import
+@import 'variables';
+.title {
+  color: $primary;
+} // ✅ 直接用，但风险高
+
+// 使用 @use
+@use 'variables';
+// @use 'variables' as *
+.title {
+  color: variables.$primary;
+} // ✅ 必须带前缀，清晰安全
+```

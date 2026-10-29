@@ -2,7 +2,7 @@
 title: Git
 icon: fa-brands fa-git-alt fa-sm
 order: 1
-category: 
+category:
   - 计算机通识
 ---
 
@@ -54,7 +54,7 @@ git switch -c 新分支名        # 在当前提交版本创建新分支
 
 ```bash
 # 将暂存区内容提交到版本库, 进入 vim 命令界面输入提交信息
-# vim 编辑器使用 修改第一行默认的提交信息，i：开始输入 esc：退出输入 
+# vim 编辑器使用 修改第一行默认的提交信息，i：开始输入 esc：退出输入
 # 退出输入后 :q即可退出vim编辑器，或者输入:q!(强制退出不保存)、:wq(保存后退出)、:wq!(强制保存后退出)
 git commit
 
@@ -78,6 +78,7 @@ git 撤销命令常用的有两个
 
 ```bash
 git reset --hard commitID         # 回滚到指定版本版本，丢弃后面的提交
+git reset HEAD~1                  # 撤回最近依次提交，文件回到工作区 数字是几就是几次
 
 git revert commitID               # 重做到之前的一次版本，保留后面的提交
 git commit -m 提交信息            # 重做后再次提交，指定的版本提交内容就已经消失
@@ -138,7 +139,6 @@ git branch --unset-upstream 本地分支名
 git branch -vv
 ```
 
-
 ## 分支与团队协作
 
 在本地进行功能开发时使用分支是一个良好的习惯，下面概述分支协作的流程：
@@ -171,22 +171,17 @@ git branch -d feature/功能名称            # 删除本地分支
 git push origin --delete feature/功能名称 # 删除远程分支
 ```
 
-
 ## 同分支协作
 
 多人**合作改动同一分支**时，建议先提交自己的本地代码，然后拉取远程最新代码后再推送。
 
 1. 当远程仓库被别人更新了时，自己的本地也做了一些修改，且别人修改的文件和自己本地修改的**文件不冲突**，此时：
-
-  - 本地还没有commit，先pull远程仓库，会将远程仓库的代码拉取到本地，云端的提交记录被同步到本地，本地已修改的代码不受影响，可以继续add，commit，push。
-
-  - 本地已经commit，然后再pull远程仓库，会在本地的commit记录补充云端的所有最新提交记录（*根据远端提交时间确定在本地commit前还是后*），并在本地追加一次最新的`Merge branch 'master' of 云端地址`，然后就可以继续push。push后远程提交记录与本地记录会保留这次merge记录。  
+   - 本地还没有commit，先pull远程仓库，会将远程仓库的代码拉取到本地，云端的提交记录被同步到本地，本地已修改的代码不受影响，可以继续add，commit，push。
+   - 本地已经commit，然后再pull远程仓库，会在本地的commit记录补充云端的所有最新提交记录（_根据远端提交时间确定在本地commit前还是后_），并在本地追加一次最新的`Merge branch 'master' of 云端地址`，然后就可以继续push。push后远程提交记录与本地记录会保留这次merge记录。
 
 2. 当远程仓库的某些文件被别人更新了，而自己的本地相同文件也做了修改发生了**文件冲突**，此时：
-
-  - 本地还没有commit，先pull远程仓库，会提示`Please commit your changes or stash them before you merge.`,即希望先commit或暂存，本地文件没有任何变化。
-
-  - 本地已经commit，然后再pull远程仓库，会提示如下，即相关文件冲突了，需要手动修复。我们手动修复后即可继续add，commit，push。提交到远程后也会携带本地的这两次commit记录。
+   - 本地还没有commit，先pull远程仓库，会提示`Please commit your changes or stash them before you merge.`,即希望先commit或暂存，本地文件没有任何变化。
+   - 本地已经commit，然后再pull远程仓库，会提示如下，即相关文件冲突了，需要手动修复。我们手动修复后即可继续add，commit，push。提交到远程后也会携带本地的这两次commit记录。
 
 ```bash
 Auto-merging c.txt
@@ -211,7 +206,6 @@ git pull --rebase origin feature/功能名称   # 变基方式进行merge
 git rebase --abort
 ```
 
-
 ## .gitignore忽略文件
 
 让git忽略指定的文件或文件夹，不进行版本控制。只需在隐藏的git文件夹同级目录下创建即可。
@@ -222,7 +216,6 @@ node_modules                    # 忽略指定文件夹
 node_modules/hello.js           # 忽略指定路径下的文件
 css/*.js                        # 忽略指定文件夹下指定后缀名文件
 ```
-
 
 ## git与换行符问题
 
@@ -235,35 +228,33 @@ css/*.js                        # 忽略指定文件夹下指定后缀名文件
 | CRLF    | LF        | CR               |
 | '\n\r'  | '\n'      | '\r'             |
 
-
 git 争对此问题有相关配置属性：
 
 `core.autocrlf` 可以控制 Git 在提交和检出时是否对换行符进行转换：
 
-  - `true`：表示在提交时将 CRLF 转换为 LF，在检出时将 LF 转换为 CRLF 。这个选项适合 Windows 用户使用。
-  - `input`：表示在提交时将 CRLF 转换为 LF，在检出时不进行转换。这个选项适合 Linux 和 MacOS 用户使用。
-  - `false`：表示不进行任何转换。这个选项适合想保持原始换行符不变的用户使用。
+- `true`：表示在提交时将 CRLF 转换为 LF，在检出时将 LF 转换为 CRLF 。这个选项适合 Windows 用户使用。
+- `input`：表示在提交时将 CRLF 转换为 LF，在检出时不进行转换。这个选项适合 Linux 和 MacOS 用户使用。
+- `false`：表示不进行任何转换。这个选项适合想保持原始换行符不变的用户使用。
 
 `core.eol`（end of line），可以指定仓库中文件使用哪种换行符,优先级更高：
 
-  - `lf`：表示仓库中文件使用 LF 作为换行符。
-  - `crlf`：表示仓库中文件使用 CRLF 作为换行符。
-  - `native`：表示仓库中文件使用当前操作系统默认的换行符。
+- `lf`：表示仓库中文件使用 LF 作为换行符。
+- `crlf`：表示仓库中文件使用 CRLF 作为换行符。
+- `native`：表示仓库中文件使用当前操作系统默认的换行符。
 
 所以，如果我们有 `prettier` 配置插件，或者是有 `.EditorConfig` 格式文件，那么可能检测插件就会报错。
 
-
-所以，争对相关报错问题: 
+所以，争对相关报错问题:
 
 1. 如果是我们 clone 后打开仓库就发现整个仓库行尾序列被插件检测到报错，就是 git自动对换行符进行转换了
-```bash
-git config --global core.autocrlf false # 关闭自动转换
-```
 
+   ```bash
+   git config --global core.autocrlf false # 关闭自动转换
+   ```
 
 ## git push 证书问题
 
-当我们向远程仓库提交代码或克隆仓库时，有时候可能会出现类似这样的报错：*fatal: unable to access "xxx": OpenSSL SSL_read:Connection was reset, errno 10054*, 根本原因在于 当你通过HTTPS访问Git远程仓库，如果服务器的SSL证书未经过第三方机构签署，那么Git就会报错。毕竟未知的没有签署过的证书意味着很大安全风险。或者，如果网站没有正式的SSL证书而是自己生成了自签署的临时证书，就可能会导致这样的报错。
+当我们向远程仓库提交代码或克隆仓库时，有时候可能会出现类似这样的报错：_fatal: unable to access "xxx": OpenSSL SSL_read:Connection was reset, errno 10054_, 根本原因在于 当你通过HTTPS访问Git远程仓库，如果服务器的SSL证书未经过第三方机构签署，那么Git就会报错。毕竟未知的没有签署过的证书意味着很大安全风险。或者，如果网站没有正式的SSL证书而是自己生成了自签署的临时证书，就可能会导致这样的报错。
 
 解决办法：关闭提交时的证书校验，再次提交
 

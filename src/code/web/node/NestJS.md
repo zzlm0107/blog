@@ -42,14 +42,14 @@ ts原生装饰器本质上就是一个函数，且只能与类绑定使用；它
 ```ts
 // 1. 这是一个纯TS装饰器函数
 function MyTag(target: any, propertyKey: string) {
-    console.log("装饰器执行了！");
-    console.log("正在处理的目标类：", target.constructor.name);
-    console.log("被标记的属性名：", propertyKey);
+  console.log('装饰器执行了！')
+  console.log('正在处理的目标类：', target.constructor.name)
+  console.log('被标记的属性名：', propertyKey)
 }
 
 class User {
-    @MyTag // 2. 使用这个纯TS装饰器
-    name: string = "Alice";
+  @MyTag // 2. 使用这个纯TS装饰器
+  name: string = 'Alice'
 }
 
 // 3. 关键点：此时我们甚至还没有 new User()，也没有调用任何东西
@@ -63,12 +63,12 @@ ts 装饰器也支持工厂方式， 通过传入一些参数，返回一个标�
 
 ```ts
 function MyTagFactory(value: string) {
-    // 可以获取到value做一些事情
-    return function (target: any, propertyKey: string) {
-        console.log("装饰器执行了！");
-        console.log("正在处理的目标类：", target.constructor.name);
-        console.log("被标记的属性名：", propertyKey);
-    };
+  // 可以获取到value做一些事情
+  return function (target: any, propertyKey: string) {
+    console.log('装饰器执行了！')
+    console.log('正在处理的目标类：', target.constructor.name)
+    console.log('被标记的属性名：', propertyKey)
+  }
 }
 ```
 
@@ -77,22 +77,22 @@ function MyTagFactory(value: string) {
 原生装饰器想要发挥真正作用，必须搭配ts官方人员开发的 reflect-metadata 库，这个库给装饰器增加了一个核心能力：在类、方法、参数上挂载“元数据映射表”，这个映射表的唯一键（Key）是由 目标对象 + 属性键 + 元数据键 三个部分组合而成的。
 
 ```ts
-import "reflect-metadata"; // 引入这个库
+import 'reflect-metadata' // 引入这个库
 
 function MyTag(target: any, propertyKey: string) {
-    // 注意这一行：我们在给 User 类的 name 属性设置一个隐藏的元数据
-    // 入参  元数据key 元数据value 目标对象  属性键
-    Reflect.defineMetadata("custom:type", "这是用户名", target, propertyKey);
+  // 注意这一行：我们在给 User 类的 name 属性设置一个隐藏的元数据
+  // 入参  元数据key 元数据value 目标对象  属性键
+  Reflect.defineMetadata('custom:type', '这是用户名', target, propertyKey)
 }
 
 class User {
-    @MyTag
-    name: string = "Alice";
+  @MyTag
+  name: string = 'Alice'
 }
 
 // 读取元数据映射表中的值
-const metadata = Reflect.getMetadata("custom:type", User.prototype, "name");
-console.log(metadata); // 输出："这是用户名"
+const metadata = Reflect.getMetadata('custom:type', User.prototype, 'name')
+console.log(metadata) // 输出："这是用户名"
 ```
 
 通过这种方式，我们可以在使用ts装饰器时挂载一些参数，这样这些参数可以在运行时被读取到进而根据入参做一些额外操作。
@@ -104,12 +104,12 @@ NestJS 定义了大量的装饰器工厂方法，根据传入的参数，借助 
 NestJS通过装饰器这种方式，让开发者只需方便的声明合适的装饰器即可，其内部会自动实现对应的创建路由功能。
 
 ```ts
-@Controller("/hello")
+@Controller('/hello')
 export class AppController {
-    @Get()
-    getHello(): string {
-        return "Hello World!";
-    }
+  @Get()
+  getHello(): string {
+    return 'Hello World!'
+  }
 }
 ```
 
@@ -135,29 +135,29 @@ export class AppController {
 下面是一个基础控制器的示例：
 
 ```ts
-import { Controller, Get, Post, Body, Param } from "@nestjs/common";
-import { BookService } from "./book.service";
-import { CreateBookDto } from "./dto/create-book.dto";
-import { UpdateBookDto } from "./dto/update-book.dto";
+import { Controller, Get, Post, Body, Param } from '@nestjs/common'
+import { BookService } from './book.service'
+import { CreateBookDto } from './dto/create-book.dto'
+import { UpdateBookDto } from './dto/update-book.dto'
 
-@Controller("book")
+@Controller('book')
 export class BookController {
-    constructor(private readonly bookService: BookService) {}
+  constructor(private readonly bookService: BookService) {}
 
-    @Post()
-    create(@Body() createBookDto: CreateBookDto) {
-        return this.bookService.create(createBookDto);
-    }
+  @Post()
+  create(@Body() createBookDto: CreateBookDto) {
+    return this.bookService.create(createBookDto)
+  }
 
-    @Get()
-    findAll() {
-        return this.bookService.findAll();
-    }
+  @Get()
+  findAll() {
+    return this.bookService.findAll()
+  }
 
-    @Get(":id")
-    findOne(@Param("id") id: string) {
-        return this.bookService.findOne(+id);
-    }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.bookService.findOne(+id)
+  }
 }
 ```
 
@@ -168,23 +168,23 @@ export class BookController {
 下面是一个基础提供者的示例：
 
 ```ts
-import { Injectable } from "@nestjs/common";
-import { CreateBookDto } from "./dto/create-book.dto";
-import { UpdateBookDto } from "./dto/update-book.dto";
+import { Injectable } from '@nestjs/common'
+import { CreateBookDto } from './dto/create-book.dto'
+import { UpdateBookDto } from './dto/update-book.dto'
 
 @Injectable()
 export class BookService {
-    create(createBookDto: CreateBookDto) {
-        return "This action adds a new book";
-    }
+  create(createBookDto: CreateBookDto) {
+    return 'This action adds a new book'
+  }
 
-    findAll() {
-        return `This action returns all book`;
-    }
+  findAll() {
+    return `This action returns all book`
+  }
 
-    findOne(id: number) {
-        return `This action returns a #${id} book`;
-    }
+  findOne(id: number) {
+    return `This action returns a #${id} book`
+  }
 }
 ```
 
@@ -206,31 +206,31 @@ A: 理论上可以这样做，但是这样会在模块A和B中创建两个提供
 下面是一个基础模块的示例：
 
 ```ts
-import { Module } from "@nestjs/common";
-import { BookService } from "./book.service";
-import { BookController } from "./book.controller";
+import { Module } from '@nestjs/common'
+import { BookService } from './book.service'
+import { BookController } from './book.controller'
 
 @Module({
-    controllers: [BookController],
-    providers: [BookService],
+  controllers: [BookController],
+  providers: [BookService],
 })
 export class BookModule {}
 ```
 
 **全局模块**
 
-全局公共模块可以使用 @Global() 装饰器定义，然后在根模块imports注册该全局模块，就可以在全局使用，其他模块无需手动声明imports导入。
+全局公共模块可以使用 @Global() 装饰器定义，全局模块只需要被 import 一次进行激活，就可以在全局使用，其他模块无需手动声明imports导入。
 
 ```ts
-import { Module, Global } from "@nestjs/common";
-import { CatsController } from "./cats.controller";
-import { CatsService } from "./cats.service";
+import { Module, Global } from '@nestjs/common'
+import { CatsController } from './cats.controller'
+import { CatsService } from './cats.service'
 
 @Global()
 @Module({
-    controllers: [CatsController],
-    providers: [CatsService],
-    exports: [CatsService],
+  controllers: [CatsController],
+  providers: [CatsService],
+  exports: [CatsService],
 })
 export class CatsModule {}
 ```
@@ -241,8 +241,8 @@ export class CatsModule {}
 
 ```ts
 @Module({
-    imports: [Module1, Module2, Module3, Module4],
-    exports: [Module1, Module2, Module3, Module4],
+  imports: [Module1, Module2, Module3, Module4],
+  exports: [Module1, Module2, Module3, Module4],
 })
 export class CommonModule {}
 ```
@@ -252,23 +252,23 @@ export class CommonModule {}
 动态模块是指在运行时根据条件动态配置的模块,通过配置 forRoot() 方法接收参数实现。动态模块返回的属性会扩展 （而非覆盖）@Module() 装饰器中定义的基础模块元数据。
 
 ```ts
-import { Module, DynamicModule } from "@nestjs/common";
-import { createDatabaseProviders } from "./database.providers";
-import { Connection } from "./connection.provider";
+import { Module, DynamicModule } from '@nestjs/common'
+import { createDatabaseProviders } from './database.providers'
+import { Connection } from './connection.provider'
 
 @Module({
-    providers: [Connection],
-    exports: [Connection],
+  providers: [Connection],
+  exports: [Connection],
 })
 export class DatabaseModule {
-    static forRoot(entities = [], options?): DynamicModule {
-        const providers = createDatabaseProviders(options, entities);
-        return {
-            module: DatabaseModule,
-            providers: providers,
-            exports: providers,
-        };
+  static forRoot(entities = [], options?): DynamicModule {
+    const providers = createDatabaseProviders(options, entities)
+    return {
+      module: DatabaseModule,
+      providers: providers,
+      exports: providers,
     }
+  }
 }
 ```
 
@@ -276,8 +276,8 @@ export class DatabaseModule {
 
 ```ts
 @Module({
-    imports: [DatabaseModule.forRoot([User])],
-    // exports: [DatabaseModule], // 重导出
+  imports: [DatabaseModule.forRoot([User])],
+  // exports: [DatabaseModule], // 重导出
 })
 export class AppModule {}
 ```
@@ -296,15 +296,15 @@ export class AppModule {}
 下面是一个基础中间件的示例：
 
 ```ts
-import { Injectable, NestMiddleware } from "@nestjs/common";
-import { Request, Response, NextFunction } from "express";
+import { Injectable, NestMiddleware } from '@nestjs/common'
+import { Request, Response, NextFunction } from 'express'
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
-    use(req: Request, res: Response, next: NextFunction) {
-        console.log("Request...");
-        next();
-    }
+  use(req: Request, res: Response, next: NextFunction) {
+    console.log('Request...')
+    next()
+  }
 }
 ```
 
@@ -313,73 +313,68 @@ export class LoggerMiddleware implements NestMiddleware {
 下面是一个包含中间件的模块的示例，多个中间件在apply方法中依次传入即可：
 
 ```ts
-import {
-    Module,
-    NestModule,
-    RequestMethod,
-    MiddlewareConsumer,
-} from "@nestjs/common";
-import { LoggerMiddleware } from "./common/middleware/logger.middleware";
-import { CatsModule } from "./cats/cats.module";
-import { CatsController } from "./cats/cats.controller";
+import { Module, NestModule, RequestMethod, MiddlewareConsumer } from '@nestjs/common'
+import { LoggerMiddleware } from './common/middleware/logger.middleware'
+import { CatsModule } from './cats/cats.module'
+import { CatsController } from './cats/cats.controller'
 
 @Module({
-    imports: [CatsModule],
+  imports: [CatsModule],
 })
 export class AppModule implements NestModule {
-    configure(consumer: MiddlewareConsumer) {
-        // consumer.apply(LoggerMiddleware).forRoutes('cats'); // 应用的路由路径
-        // consumer.apply(LoggerMiddleware).forRoutes({ path: 'cats', method: RequestMethod.GET }); // 应用的路由路径和请求方法
-        // consumer.apply(LoggerMiddleware).forRoutes(CatsController); // 甚至应用控制器
+  configure(consumer: MiddlewareConsumer) {
+    // consumer.apply(LoggerMiddleware).forRoutes('cats'); // 应用的路由路径
+    // consumer.apply(LoggerMiddleware).forRoutes({ path: 'cats', method: RequestMethod.GET }); // 应用的路由路径和请求方法
+    // consumer.apply(LoggerMiddleware).forRoutes(CatsController); // 甚至应用控制器
 
-        // 排除指定路由
-        consumer
-            .apply(LoggerMiddleware)
-            .exclude(
-                { path: "cats", method: RequestMethod.GET },
-                { path: "cats", method: RequestMethod.POST },
-                "cats/{*splat}",
-            )
-            .forRoutes("cats");
-    }
+    // 排除指定路由
+    consumer
+      .apply(LoggerMiddleware)
+      .exclude(
+        { path: 'cats', method: RequestMethod.GET },
+        { path: 'cats', method: RequestMethod.POST },
+        'cats/{*splat}',
+      )
+      .forRoutes('cats')
+  }
 }
 ```
 
 **全局中间件**
 
-通过使用 INestApplication 实例提供的 use() 方法，进行全局中间件的注册，即在app实例上注册中间件。
+通过使用 INestApplication 实例提供的 use() 方法，进行全局中间件的注册，即在app实例上注册中间件，但是注意这种方式只适用函数式中间件，即express类型的中间件； 如果希望注册全局的类中间件，则应该在 `app.module` 中全局注册匹配`forRoutes("{*path}")`，具体参考上面的模块中注册中间件即可。
 
 ```ts
-const app = await NestFactory.create(AppModule);
-app.use(logger);
-await app.listen(process.env.PORT ?? 3000);
+const app = await NestFactory.create(AppModule)
+app.use(logger) // 函数式全局中间件
+await app.listen(process.env.PORT ?? 3000)
 ```
 
 ## 守卫
 
-守卫是一个用 @Injectable() 装饰器注解的类，它实现了 CanActivate 接口。守卫的唯一职责就是根据运行时存在的某些条件（如权限、角色、访问控制列表等）来决定是否允许请求继续执行。 守卫需要包括 canActivate() 方法，该方法接收 ExecutionContext 参数，用于获取请求上下文。方法如果返回 true，则请求继续执行；如果返回 false，则请求被拒绝。
+守卫是一个用 @Injectable() 装饰器注解的类，它实现了 CanActivate 接口。守卫的唯一职责就是根据入参条件进行鉴权，守卫与中间件相比，他知道自己下一步会执行什么。 守卫需要包括 canActivate() 方法，该方法接收 ExecutionContext 参数，用于获取请求上下文。方法如果返回 true，则请求继续执行；如果返回 false，则请求被拒绝。
 
 下面是一个简单的守卫的示例：
 
 ```ts
-import { Injectable, CanActivate, ExecutionContext } from "@nestjs/common";
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    canActivate(context: ExecutionContext): boolean | Promise<boolean> {
-        const request = context.switchToHttp().getRequest();
-        // 获取到请求对象就可以判断权限
-    }
+  canActivate(context: ExecutionContext): boolean | Promise<boolean> {
+    const request = context.switchToHttp().getRequest()
+    // 获取到请求对象就可以判断权限
+  }
 }
 ```
 
 要想使用这个守卫，需要在控制器上使用 @UseGuards() 装饰器。
 
 ```ts
-import { Controller, UseGuards } from "@nestjs/common";
-import { AuthGuard } from "./auth.guard";
+import { Controller, UseGuards } from '@nestjs/common'
+import { AuthGuard } from './auth.guard'
 
-@Controller("cats")
+@Controller('cats')
 @UseGuards(AuthGuard)
 export class CatsController {}
 ```
@@ -387,8 +382,8 @@ export class CatsController {}
 当然也可以在方法上使用，直接在方法上使用 @UseGuards() 装饰器即可。也可以全局挂载守卫
 
 ```ts
-const app = await NestFactory.create(AppModule);
-app.useGlobalGuards(new RolesGuard());
+const app = await NestFactory.create(AppModule)
+app.useGlobalGuards(new RolesGuard())
 ```
 
 ## 异常过滤器
@@ -422,50 +417,64 @@ async findAll() {
 如果我们不想使用内置的异常处理而是想要用自定义的异常过滤器，就需要按要求实现 ExceptionFilter 接口,并访问底层平台的 Request 和 Response 对象以便获取到请求信息和直接返回响应内容：
 
 ```ts
-import {
-    ExceptionFilter,
-    Catch,
-    ArgumentsHost,
-    HttpException,
-} from "@nestjs/common";
-import { Request, Response } from "express";
+import { ExceptionFilter, Catch, ArgumentsHost, HttpException } from '@nestjs/common'
+import { Request, Response } from 'express'
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
-    catch(exception: HttpException, host: ArgumentsHost) {
-        const ctx = host.switchToHttp();
-        const response = ctx.getResponse<Response>();
-        const request = ctx.getRequest<Request>();
-        const status = exception.getStatus();
+  catch(exception: HttpException, host: ArgumentsHost) {
+    const ctx = host.switchToHttp()
+    const response = ctx.getResponse<Response>()
+    const request = ctx.getRequest<Request>()
+    const status = exception.getStatus()
 
-        response.status(status).json({
-            statusCode: status,
-            timestamp: new Date().toISOString(),
-            path: request.url,
-        });
-    }
+    response.status(status).json({
+      statusCode: status,
+      timestamp: new Date().toISOString(),
+      path: request.url,
+    })
+  }
 }
 ```
 
 使用自定义异常过滤器，只需要在控制器上使用 @UseFilters() 装饰器 或者在方法上使用即可。
 
 ```ts
-import { UseFilters } from "@nestjs/common";
+import { UseFilters } from '@nestjs/common'
 
 @Controller()
 @UseFilters(HttpExceptionFilter)
 export class CatsController {}
 ```
 
-当然也可以全局挂载
+当然也可以全局挂载， 并且有两种方式
+
+- 方式一： main.ts 中使用 `app.useGlobalFilters` 方法传入异常过滤器实例，相当于手动创建实例传入，这种方式脱离了NestJS的依赖注入管理，只适合简单无依赖的过滤器；如果过滤器内需要注入 `ConfigService` 等依赖，这种方式就不可行
+
+- 方式二：通过 Module 的 `providers` 注册，让 NestJS 容器管理实例;导入 `APP_FILTER` 声明是全局异常过滤器。
 
 ```ts
+// 全局挂载方式一： main.ts
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
-    app.useGlobalFilters(HttpExceptionFilter);
-    await app.listen(process.env.PORT ?? 3000);
+  const app = await NestFactory.create(AppModule)
+  app.useGlobalFilters(new HttpExceptionFilter())
+  await app.listen(process.env.PORT ?? 3000)
 }
-bootstrap();
+bootstrap()
+
+// 全局挂载方式二： Module 的 `providers` 注册
+import { Module } from '@nestjs/common'
+import { APP_FILTER } from '@nestjs/core'
+
+@Module({
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+  ],
+})
+export class AppModule {}
 ```
 
 ## 拦截器
@@ -483,33 +492,26 @@ bootstrap();
 intercept方法包含两个参数，ExecutionContext 继承自 ArgumentsHost，可以拿到请求上下文， CallHandler 实现了 handle() 方法， handle() 方法就是执行路由处理方法，执行后就可以获取到路由处理方法的返回值，其被包装成 RxJS 的 Observable 类型。 下面是一个基础拦截器示例
 
 ```ts
-import {
-    Injectable,
-    NestInterceptor,
-    ExecutionContext,
-    CallHandler,
-} from "@nestjs/common";
-import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common'
+import { Observable } from 'rxjs'
+import { tap } from 'rxjs/operators'
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
-    //
-    intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-        console.log("Before...");
+  //
+  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    console.log('Before...')
 
-        const now = Date.now();
-        return next
-            .handle()
-            .pipe(tap(() => console.log(`After... ${Date.now() - now}ms`)));
-    }
+    const now = Date.now()
+    return next.handle().pipe(tap(() => console.log(`After... ${Date.now() - now}ms`)))
+  }
 }
 ```
 
 要使用这个拦截器，只需要在控制器上使用 @UseInterceptors() 装饰器 或者在方法上使用即可。
 
 ```ts
-import { UseInterceptors } from "@nestjs/common";
+import { UseInterceptors } from '@nestjs/common'
 
 @UseInterceptors(LoggingInterceptor)
 export class CatsController {}
@@ -517,6 +519,36 @@ export class CatsController {}
 // 全局挂载
 // const app = await NestFactory.create(AppModule);
 // app.useGlobalInterceptors(new LoggingInterceptor());
+```
+
+当然也可以全局挂载， 并且与异常过滤器一样有两种方式：
+
+- 方式一： main.ts 中使用 `app.useGlobalInterceptors` 方法传入拦截器实例，相当于手动创建实例传入，这种方式脱离了NestJS的依赖注入管理，只适合简单无依赖的拦截器；如果过滤器内需要注入 `ConfigService` 等依赖，这种方式就不可行
+
+- 方式二：通过 Module 的 `providers` 注册，让 NestJS 容器管理实例;导入 `APP_INTERCEPTOR` 声明是全局拦截器。
+
+```ts
+// 全局挂载方式一： main.ts
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule)
+  app.useGlobalInterceptors(new ResponseInterceptor())
+  await app.listen(process.env.PORT ?? 3000)
+}
+bootstrap()
+
+// 全局挂载方式二： Module 的 `providers` 注册
+import { Module } from '@nestjs/common'
+import { APP_INTERCEPTOR } from '@nestjs/core'
+
+@Module({
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseInterceptor,
+    },
+  ],
+})
+export class AppModule {}
 ```
 
 ## 管道
@@ -569,7 +601,7 @@ async findOne(@Param('uuid', new ParseUUIDPipe()) uuid: string) {
 npm i --save class-validator class-transformer
 ```
 
-之后在我们定义类类型DTO时，就可以使用 class-validator 库提供的装饰器来定义验证规则, 然后在控制器中导入使用时会自动验证入参是否符合要求，如果需要全局挂载这个DTO，则绑定ValidationPipe管道应用入口实现全局挂载即可。
+之后在我们定义类类型DTO时，就可以使用 class-validator 库提供的装饰器来定义验证规则, 然后在控制器中导入使用时会自动验证入参是否符合要求。
 
 ```ts
 // create-cat.dto.ts
@@ -590,29 +622,52 @@ async create(@Body() createCatDto: CreateCatDto) {
 }
 ```
 
-全局挂载：
+最后在全局挂载 ValidationPipe 即可开启Dto验证，并且与异常过滤器一样有两种方式：
+
+- 方式一： main.ts 中使用 `app.useGlobalPipes` 方法传入拦截器实例，相当于手动创建实例传入，这种方式脱离了NestJS的依赖注入管理，只适合简单无依赖的拦截器；如果过滤器内需要注入 `ConfigService` 等依赖，这种方式就不可行
+
+- 方式二：通过 Module 的 `providers` 注册，让 NestJS 容器管理实例;导入 `APP_PIPE` 声明是全局验证管道。
 
 ```ts
-import { ValidationPipe } from "@nestjs/common";
+import { ValidationPipe } from '@nestjs/common'
 
+// 方法一
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
-    // 全局注册官方 ValidationPipe
-    app.useGlobalPipes(
-        new ValidationPipe({
-            // 1. 自动剥离 DTO 中未定义的属性（防止用户传多余字段）
-            whitelist: true,
+  const app = await NestFactory.create(AppModule)
+  // 全局注册官方 ValidationPipe
+  app.useGlobalPipes(
+    new ValidationPipe({
+      // 1. 自动剥离 DTO 中未定义的属性（防止用户传多余字段）
+      whitelist: true,
 
-            // 2. 如果用户传了未定义的属性，直接抛出 400 错误（更严格）
-            forbidNonWhitelisted: false,
+      // 2. 如果用户传了未定义的属性，直接抛出 400 错误（更严格）
+      forbidNonWhitelisted: false,
 
-            // 3. 自动将传入的普通 JS 对象转换为 DTO 类的实例（支持类型自动转换）
-            transform: true,
-        }),
-    );
-    await app.listen(process.env.PORT ?? 3000);
+      // 3. 自动将传入的普通 JS 对象转换为 DTO 类的实例（支持类型自动转换）
+      transform: true,
+    }),
+  )
+  await app.listen(process.env.PORT ?? 3000)
 }
-bootstrap();
+bootstrap()
+
+// 方法二
+import { Module } from '@nestjs/common'
+import { APP_PIPE } from '@nestjs/core'
+
+@Module({
+  providers: [
+    {
+      provide: APP_PIPE,
+      useValue: new ValidationPipe({
+        whitelist: true,
+        forbidNonWhitelisted: true,
+        transform: true,
+      }),
+    },
+  ],
+})
+export class AppModule {}
 ```
 
 ## 数据库
@@ -626,25 +681,25 @@ npm install --save @nestjs/typeorm typeorm mysql2
 1. 创建数据库连接配置并在AppModule中导入
 
 ```ts
-import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { Cat } from "./entity/cat";
+import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { Cat } from './entity/cat'
 
 @Module({
-    imports: [
-        // 配置数据库连接
-        TypeOrmModule.forRoot({
-            type: "mysql",
-            host: "localhost",
-            port: 3306,
-            username: "root",
-            password: "root",
-            database: "test",
-            // entities: [Cat], // 实体类数组，service使用的实体类仓库在这里也需要注册
-            autoLoadEntities: true, // 自动加载实体类
-            // synchronize: false, // 自动同步表结构，例如实体类新增或删除了表字段，会自动执行相关sql语句同步表结构
-        }),
-    ],
+  imports: [
+    // 配置数据库连接
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'root',
+      database: 'test',
+      // entities: [Cat], // 实体类数组，service使用的实体类仓库在这里也需要注册
+      autoLoadEntities: true, // 自动加载实体类
+      // synchronize: false, // 自动同步表结构，例如实体类新增或删除了表字段，会自动执行相关sql语句同步表结构
+    }),
+  ],
 })
 export class AppModule {}
 ```
@@ -652,35 +707,35 @@ export class AppModule {}
 2. 定义表实体类，就是声明表结构，一般会在与表功能相关的模块下的entity目录下。实体类定义完成后，需要在上一步的数据库连接entities中添加该实体类。
 
 ```ts
-import { Entity, PrimaryColumn, Column } from "typeorm";
+import { Entity, PrimaryColumn, Column } from 'typeorm'
 
-@Entity("user")
+@Entity('user')
 export class User {
-    @PrimaryColumn({ type: "char", length: 36 })
-    id: string;
+  @PrimaryColumn({ type: 'char', length: 36 })
+  id: string
 
-    @Column({ type: "char", length: 11, unique: true, nullable: false })
-    phone: string;
+  @Column({ type: 'char', length: 11, unique: true, nullable: false })
+  phone: string
 
-    @Column({ type: "varchar", length: 50, nullable: true, default: null })
-    email: string;
+  @Column({ type: 'varchar', length: 50, nullable: true, default: null })
+  email: string
 
-    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
-    create_time: Date;
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  create_time: Date
 }
 ```
 
 3. 在需要使用这个实体类的模块，通过 `TypeOrmModule.forFeature` 注册对应的实体类
 
 ```ts
-import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { Cat } from "./entity/cat";
+import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { Cat } from './entity/cat'
 
 @Module({
-    imports: [
-        TypeOrmModule.forFeature([Cat]), // 注册实体类
-    ],
+  imports: [
+    TypeOrmModule.forFeature([Cat]), // 注册实体类
+  ],
 })
 export class CatsModule {}
 ```
@@ -688,82 +743,73 @@ export class CatsModule {}
 4. 在需要使用这个实体类的提供者service中，通过 `InjectRepository` 装饰器注入对应的仓库（Repository），之后就可以在service中进行数据库操作了。
 
 ```ts
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { Cat } from "./entity/cat";
+import { Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { Cat } from './entity/cat'
 
 @Injectable()
 export class CatsService {
-    constructor(
-        @InjectRepository(Cat)
-        private catsRepository: Repository<Cat>, // TypeORM提供的操作类，封装了CRUD方法
-    ) {}
+  constructor(
+    @InjectRepository(Cat)
+    private catsRepository: Repository<Cat>, // TypeORM提供的操作类，封装了CRUD方法
+  ) {}
 
-    findAll(): Promise<Cat[]> {
-        return this.catsRepository.find();
-    }
+  findAll(): Promise<Cat[]> {
+    return this.catsRepository.find()
+  }
 
-    findOne(id: number): Promise<Cat | null> {
-        return this.catsRepository.findOneBy({ id });
-    }
+  findOne(id: number): Promise<Cat | null> {
+    return this.catsRepository.findOneBy({ id })
+  }
 
-    async remove(id: number): Promise<void> {
-        await this.catsRepository.delete(id);
-    }
+  async remove(id: number): Promise<void> {
+    await this.catsRepository.delete(id)
+  }
 }
 ```
 
 5. 如果想直接执行sql语句，一种方式是直接调用 `Repository` 中的 `query` 方法，不过这种方式不支持事务；
 
 ```ts
-const result = await this.catsRepository.query(
-    "SELECT * FROM cat WHERE id = $1",
-    [id],
-);
+const result = await this.catsRepository.query('SELECT * FROM cat WHERE id = $1', [id])
 ```
 
 6. 而使用 DataSource 创建 queryRunner 是一种支持事务的方式。
 
 ```ts
-import { Injectable } from "@nestjs/common";
-import { InjectDataSource } from "@nestjs/typeorm";
-import { DataSource } from "typeorm";
+import { Injectable } from '@nestjs/common'
+import { InjectDataSource } from '@nestjs/typeorm'
+import { DataSource } from 'typeorm'
 
 @Injectable()
 export class CatsService {
-    constructor(@InjectDataSource() private dataSource: DataSource) {}
+  constructor(@InjectDataSource() private dataSource: DataSource) {}
 
-    async complexTransaction(id: number) {
-        // 1. 创建 QueryRunner 实例
-        const queryRunner = this.dataSource.createQueryRunner();
+  async complexTransaction(id: number) {
+    // 1. 创建 QueryRunner 实例
+    const queryRunner = this.dataSource.createQueryRunner()
 
-        // 2. 连接到数据库并开启事务
-        await queryRunner.connect();
-        await queryRunner.startTransaction();
+    // 2. 连接到数据库并开启事务
+    await queryRunner.connect()
+    await queryRunner.startTransaction()
 
-        try {
-            // 3. 使用 queryRunner.manager 执行所有操作
-            await queryRunner.manager.query(
-                `UPDATE cats SET status = 'active' WHERE id = $1`,
-                [id],
-            );
+    try {
+      // 3. 使用 queryRunner.manager 执行所有操作
+      await queryRunner.manager.query(`UPDATE cats SET status = 'active' WHERE id = $1`, [id])
 
-            await queryRunner.manager.query(
-                `INSERT INTO cat_audit (cat_id, action) VALUES ($1, 'activated')`,
-                [id],
-            );
+      await queryRunner.manager.query(`INSERT INTO cat_audit (cat_id, action) VALUES ($1, 'activated')`, [id])
 
-            // 4. 所有操作成功，提交事务
-            await queryRunner.commitTransaction();
-        } catch (error) {
-            // 5. 发生错误，回滚事务
-            await queryRunner.rollbackTransaction();
-            throw error; // 重新抛出异常
-        } finally {
-            // 6. 释放 QueryRunner
-            await queryRunner.release();
-        }
+      // 4. 所有操作成功，提交事务
+      await queryRunner.commitTransaction()
+    } catch (error) {
+      // 5. 发生错误，回滚事务
+      await queryRunner.rollbackTransaction()
+      throw error // 重新抛出异常
+    } finally {
+      // 6. 释放 QueryRunner
+      await queryRunner.release()
     }
+  }
 }
 ```
